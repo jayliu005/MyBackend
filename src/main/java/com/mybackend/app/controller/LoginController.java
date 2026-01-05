@@ -1,6 +1,7 @@
 package com.mybackend.app.controller;
 
 import com.mybackend.app.dao.entity.User;
+import com.mybackend.app.dao.vo.UserProfileVO;
 import com.mybackend.app.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ public class LoginController {
     }
 
     @GetMapping("/userById/{userId}")
-    public User gerNameById(@PathVariable Long userId) {
+    public UserProfileVO gerNameById(@PathVariable Long userId) {
         return loginService.gerUserById(userId);
     }
 

@@ -1,10 +1,11 @@
 package com.mybackend.app.service;
 
 import com.mybackend.app.dao.entity.User;
+import com.mybackend.app.dao.vo.UserProfileVO;
 
 public interface LoginService {
 
     String helloWorld();
 
-    User gerUserById(Long id);
+    UserProfileVO gerUserById(Long id);
 }
