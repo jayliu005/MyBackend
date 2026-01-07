@@ -1,13 +1,10 @@
 package com.mybackend.app.controller;
 
-import com.mybackend.app.dao.entity.User;
+import com.mybackend.app.dao.dto.RegisterDTO;
 import com.mybackend.app.dao.vo.UserProfileVO;
 import com.mybackend.app.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/web/login")
@@ -19,6 +16,11 @@ public class LoginController {
     @GetMapping("/helloWorld")
     public String helloWorld() {
         return loginService.helloWorld();
+    }
+
+    @PostMapping("/register")
+    public void register(@RequestBody RegisterDTO dto) {
+        loginService.register(dto);
     }
 
     @GetMapping("/userById/{userId}")

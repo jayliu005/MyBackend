@@ -1,6 +1,8 @@
 package com.mybackend.app.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.mybackend.app.config.UserStatus;
+import com.mybackend.app.dao.dto.RegisterDTO;
 import com.mybackend.app.dao.entity.User;
 import com.mybackend.app.dao.entity.UserProfile;
 import com.mybackend.app.dao.mapper.UserMapper;
@@ -8,6 +10,7 @@ import com.mybackend.app.dao.mapper.UserProfileMapper;
 import com.mybackend.app.dao.vo.UserProfileVO;
 import com.mybackend.app.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,9 +22,22 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private UserProfileMapper userProfileMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public String helloWorld() {
         return "Hello World";
+    }
+
+    public void register(RegisterDTO dto) {
+        String hash = passwordEncoder.encode(dto.getPassword());
+
+        User user = new User();
+        user.setAccount(dto.getAccount());
+        user.setPassword(hash);
+        user.setStatus(UserStatus.ENABLE.getStatus());
+        userMapper.insert(user);
     }
 
     @Override
